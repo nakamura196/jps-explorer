@@ -173,7 +173,7 @@ class AppLocalizationsJa extends AppLocalizations {
   String get todaysPick => '本日の一品';
 
   @override
-  String get tipJar => '投げ銭';
+  String get tipJar => 'チップ';
 
   @override
   String get tipJarDescription => 'このアプリが気に入ったら、開発を支援していただけると嬉しいです';

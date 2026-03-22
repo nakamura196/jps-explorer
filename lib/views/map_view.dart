@@ -150,16 +150,6 @@ class _MapViewState extends ConsumerState<MapView> {
           ),
         ),
 
-        // "My location" FAB
-        Positioned(
-          bottom: 16,
-          right: 16,
-          child: FloatingActionButton(
-            onPressed: _goToMyLocation,
-            child: const Icon(Icons.my_location),
-          ),
-        ),
-
         // Draggable bottom sheet with search results
         DraggableScrollableSheet(
           initialChildSize: 0.3,
@@ -273,6 +263,17 @@ class _MapViewState extends ConsumerState<MapView> {
               ),
             );
           },
+        ),
+
+        // "My location" FAB (must be after DraggableScrollableSheet to be on top)
+        Positioned(
+          bottom: MediaQuery.of(context).size.height * 0.3 + 16,
+          right: 16,
+          child: FloatingActionButton.small(
+            heroTag: 'myLocation',
+            onPressed: _goToMyLocation,
+            child: const Icon(Icons.my_location),
+          ),
         ),
       ],
     );

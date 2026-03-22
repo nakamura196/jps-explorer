@@ -223,7 +223,7 @@ jps_explorer/
 │   │   ├── image_cache_service.dart  # オフライン画像
 │   │   ├── spotlight_service.dart    # iOS Spotlight
 │   │   ├── favorites_service.dart
-│   │   └── tip_jar_service.dart      # 投げ銭
+│   │   └── tip_jar_service.dart      # チップ
 │   ├── views/                        # 各画面
 │   └── providers/app_providers.dart  # Riverpod
 ├── scripts/

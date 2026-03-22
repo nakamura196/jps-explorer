@@ -7,6 +7,7 @@ import '../l10n/app_localizations.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import '../providers/app_providers.dart';
 import '../services/image_cache_service.dart';
+import '../services/label_service.dart';
 import 'item_detail_view.dart';
 
 class FavoritesView extends ConsumerWidget {
@@ -83,12 +84,9 @@ class FavoritesView extends ConsumerWidget {
                 maxLines: 2,
                 overflow: TextOverflow.ellipsis,
               ),
-              subtitle: Text(
-                [item.type, item.database]
-                    .where((e) => e != null)
-                    .join(' / '),
-                maxLines: 1,
-                overflow: TextOverflow.ellipsis,
+              subtitle: _DatabaseLabel(
+                databaseId: item.database,
+                type: item.type,
               ),
               onTap: () {
                 Navigator.of(context).push(
@@ -155,6 +153,46 @@ class _OfflineImageState extends State<_OfflineImage> {
       placeholder: (_, __) =>
           const Center(child: CircularProgressIndicator(strokeWidth: 2)),
       errorWidget: (_, __, ___) => const Icon(Icons.broken_image),
+    );
+  }
+}
+
+class _DatabaseLabel extends ConsumerStatefulWidget {
+  final String? databaseId;
+  final String? type;
+
+  const _DatabaseLabel({this.databaseId, this.type});
+
+  @override
+  ConsumerState<_DatabaseLabel> createState() => _DatabaseLabelState();
+}
+
+class _DatabaseLabelState extends ConsumerState<_DatabaseLabel> {
+  String? _label;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _resolveLabel();
+  }
+
+  Future<void> _resolveLabel() async {
+    if (widget.databaseId == null) return;
+    final labelService = ref.read(labelServiceProvider);
+    final lang = Localizations.localeOf(context).languageCode;
+    final label = await labelService.databaseLabel(widget.databaseId, lang);
+    if (mounted && label != widget.databaseId) {
+      setState(() => _label = label);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final dbName = _label ?? widget.databaseId;
+    return Text(
+      [widget.type, dbName].where((e) => e != null).join(' / '),
+      maxLines: 1,
+      overflow: TextOverflow.ellipsis,
     );
   }
 }

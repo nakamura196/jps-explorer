@@ -1,7 +1,7 @@
 name: jps_explorer
 description: "Japan Search Explorer — 日本の文化資源をビジュアルに探索するアプリ"
 publish_to: 'none'
-version: 1.0.0+1
+version: 1.0.0+2
 
 environment:
   sdk: ^3.11.1

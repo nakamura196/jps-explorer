@@ -47,6 +47,10 @@
 			</array>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>文化資源に似た画像を検索するためにカメラを使用します</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>文化資源に似た画像を検索するために写真ライブラリを使用します</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>周辺の文化資源を検索するために位置情報を使用します</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>

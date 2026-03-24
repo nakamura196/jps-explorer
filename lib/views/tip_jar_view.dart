@@ -121,15 +121,25 @@ class _TipJarViewState extends ConsumerState<TipJarView> {
             ),
           ],
 
-          // Error message
+          // Error message (show as info, not error)
           if (_service.state == TipJarState.error)
-            Text(
-              _service.errorMessage,
-              style: TextStyle(
-                fontSize: 12,
-                color: theme.colorScheme.error,
+            Card(
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Column(
+                  children: [
+                    Icon(Icons.info_outline, color: theme.colorScheme.outline),
+                    const SizedBox(height: 8),
+                    Text(
+                      'チップ機能は現在準備中です。',
+                      style: theme.textTheme.bodyMedium?.copyWith(
+                        color: theme.colorScheme.outline,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
               ),
-              textAlign: TextAlign.center,
             ),
         ],
       ),

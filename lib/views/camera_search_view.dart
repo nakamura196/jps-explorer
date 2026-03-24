@@ -47,6 +47,17 @@ class _CameraSearchViewState extends ConsumerState<CameraSearchView> {
         _imageSearchResults = null;
         _imageSearchHits = null;
       });
+    } on PlatformException catch (e) {
+      if (mounted) {
+        final msg = e.code == 'camera_access_denied'
+            ? 'カメラへのアクセスが許可されていません。設定アプリから許可してください。'
+            : e.code == 'photo_access_denied'
+                ? '写真ライブラリへのアクセスが許可されていません。'
+                : AppLocalizations.of(context)!.errorOccurred;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text(msg)),
+        );
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
